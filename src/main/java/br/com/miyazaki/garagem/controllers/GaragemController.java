@@ -4,6 +4,7 @@
  */
 package br.com.miyazaki.garagem.controllers;
 
+import br.com.miyazaki.garagem.DTO.VeiculoMinDTO;
 import br.com.miyazaki.garagem.entities.Veiculo;
 import br.com.miyazaki.garagem.service.GaragemService;
 import java.util.List;
@@ -37,6 +38,16 @@ public class GaragemController {
         }else{
             return ResponseEntity.ok(result);
         }
+    }
+    
+    @GetMapping("/color/{corName}")
+    public ResponseEntity<List<VeiculoMinDTO>> findByCorIgnoreCase(@PathVariable String corName){
         
+        List<VeiculoMinDTO> result = garagemService.findByCor(corName);
+        if(result.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(result);
+        }
     }
 }

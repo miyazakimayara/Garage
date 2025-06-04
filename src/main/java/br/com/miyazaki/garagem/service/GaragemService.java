@@ -4,11 +4,11 @@
  */
 package br.com.miyazaki.garagem.service;
 
+import br.com.miyazaki.garagem.DTO.VeiculoMinDTO;
 import br.com.miyazaki.garagem.entities.Veiculo;
 import br.com.miyazaki.garagem.repositories.GaragemRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,5 +30,14 @@ public class GaragemService {
     public Veiculo findById(long id){
         Veiculo result = garagemRepository.findById(id);
         return result;
+    }
+    
+    public List<VeiculoMinDTO> findByCor(String cor){
+        List<Veiculo> resultVeiculo = garagemRepository.findByCorIgnoreCase(cor);
+              
+        List<VeiculoMinDTO> resultDTO = resultVeiculo.stream()
+                .map(x -> new VeiculoMinDTO(x)).toList();
+    
+    return resultDTO;
     }
 }
