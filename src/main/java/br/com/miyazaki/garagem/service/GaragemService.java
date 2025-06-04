@@ -8,6 +8,7 @@ import br.com.miyazaki.garagem.entities.Veiculo;
 import br.com.miyazaki.garagem.repositories.GaragemRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +24,11 @@ public class GaragemService {
     public List<Veiculo> findAll(){
         
         List<Veiculo> result = garagemRepository.findAll();
+        return result;
+    }
+    
+    public Veiculo findById(long id){
+        Veiculo result = garagemRepository.findById(id);
         return result;
     }
 }
