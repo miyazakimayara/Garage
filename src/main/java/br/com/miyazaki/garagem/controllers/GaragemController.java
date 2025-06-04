@@ -29,6 +29,7 @@ public class GaragemController {
        List<Veiculo> result = garagemService.findAll();
        return result;
     }
+    
     @GetMapping("/id/{id}")
     public ResponseEntity<Veiculo> findById(@PathVariable long id){
         Veiculo result = garagemService.findById(id);
@@ -44,6 +45,17 @@ public class GaragemController {
     public ResponseEntity<List<VeiculoMinDTO>> findByCorIgnoreCase(@PathVariable String corName){
         
         List<VeiculoMinDTO> result = garagemService.findByCor(corName);
+        if(result.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(result);
+        }
+    }
+    
+    @GetMapping("/year/{anoName}")
+    public ResponseEntity<List<VeiculoMinDTO>> findByAno(@PathVariable int anoName){
+        
+        List<VeiculoMinDTO> result = garagemService.findByAno(anoName);
         if(result.isEmpty()){
             return ResponseEntity.notFound().build();
         }else{

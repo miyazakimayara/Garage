@@ -40,4 +40,13 @@ public class GaragemService {
     
     return resultDTO;
     }
+    
+    public List<VeiculoMinDTO> findByAno(int ano){
+        List<Veiculo> resultVeiculo = garagemRepository.findByAno(ano);
+              
+        List<VeiculoMinDTO> resultDTO = resultVeiculo.stream()
+                .map(x -> new VeiculoMinDTO(x)).toList();
+    
+    return resultDTO;
+    }
 }
